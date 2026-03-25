@@ -58,10 +58,11 @@ npx playwright test
 ## 📊 View Report
 npx playwright show-report
 🎯 Purpose
+```
 
 This project was built to demonstrate QA Automation skills, focusing on scalable test architecture and best practices aligned with an SDET role.x
 
- 👩🏻‍💻 Author
+## 👩🏻‍💻 Author
 
 Naomi Quintero
 QA Automation Engineer (SDET Path)
