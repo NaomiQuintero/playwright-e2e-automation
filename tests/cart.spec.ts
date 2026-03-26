@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/LoginPage';
-import { InventoryPage } from '../src/pages/InventoryPAge';
+import { InventoryPage } from '../src/pages/InventoryPage';
 import { CartPage } from '../src/pages/CartPage';
 import users from '../test-data/qa/Users.json'
 
@@ -18,8 +18,10 @@ test.describe('Cart functionality', () => {
         const inventoryPage = new InventoryPage(page);
         const cartPage = new CartPage(page);
 
+        const product = 'Sauce Labs Backpack';
 
-        await inventoryPage.addProductToCart('Sauce Labs Backpack');
+        await inventoryPage.addProductToCart(product);
+        await expect(inventoryPage.getCartBadge()).toHaveText('1');
         await inventoryPage.goToCart();
 
         await expect(page).toHaveURL(/cart/);
@@ -35,8 +37,9 @@ test.describe('Cart functionality', () => {
         const listOfProducts = ['Sauce Labs Backpack', 'Sauce Labs Onesie', 'Sauce Labs Bolt T-Shirt'];
 
         await inventoryPage.addMultipleProducts(listOfProducts);
+        await expect(inventoryPage.getCartBadge()).toHaveText(String(listOfProducts.length));
         await inventoryPage.goToCart();
-       
+
         await expect(page).toHaveURL(/cart/);
 
         expect(await cartPage.getCartItems()).toHaveCount(listOfProducts.length);
@@ -45,6 +48,22 @@ test.describe('Cart functionality', () => {
             await expect(cartPage.getCartItemByName(product)).toBeVisible();
         }
 
+    });
+
+    test('User can remove product from cart', async ({ page }) => {
+        const inventoryPage = new InventoryPage(page);
+        const cartPage = new CartPage(page);
+
+        const product = 'Sauce Labs Backpack';
+
+        await inventoryPage.addProductToCart(product);
+        await inventoryPage.goToCart();
+
+        await expect(cartPage.getCartItemByName(product)).toBeVisible();
+
+        await cartPage.removeProduct(product).click();
+
+        await expect(cartPage.getCartItemByName(product)).toHaveCount(0);
     });
 
 });

@@ -13,4 +13,12 @@ export class CartPage {
             hasText: productName
         });
     }
+
+    removeProduct(productName: string) {
+        const product = this.page.locator('.cart_item', {
+            hasText: productName
+        });
+
+        return product.locator('button');
+    }
 }

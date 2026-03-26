@@ -21,6 +21,10 @@ export class InventoryPage {
         }
     }
 
+    getCartBadge() {
+        return this.page.locator('.shopping_cart_badge');
+    }
+
     async goToCart() {
         await this.page.click('[data-test="shopping-cart-link"]')
     }

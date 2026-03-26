@@ -6,5 +6,18 @@
   "invalidUser": {
     "username": "invalid_user",
     "password": "wrong_password"
+  },
+  "locked_user": {
+    "username": "locked_out_user",
+    "password": "secret_sauce"
+  },
+  "unregister_user": {
+    "username": "not_register_user",
+    "password": "fake_password"
+  },
+  "trimming_user": {
+    "username": "   standard_user   ",
+    "password": "   secret_sauce   "
   }
+
 }

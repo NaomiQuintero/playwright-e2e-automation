@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/LoginPage';
-import { InventoryPage } from '../src/pages/InventoryPAge';
+import { InventoryPage } from '../src/pages/InventoryPage';
 import { CartPage } from '../src/pages/CartPage';
 import { CheckoutPage } from '../src/pages/CheckoutPage';
 import users from '../test-data/qa/Users.json';
@@ -74,7 +74,9 @@ test.describe('Checkout functionality', () => {
 
         await checkoutPage.continueCheckout();
 
-        await expect(checkoutPage.getErrorMessage()).toBeVisible();
-        await expect(checkoutPage.getErrorMessage()).toContainText('Error: First Name is required');
+        const error = checkoutPage.getErrorMessage();
+        await expect(error).toBeVisible();
+        await expect(error).toContainText('Error: First Name is required');
     });
+
 });
